@@ -1,0 +1,15 @@
+#include<iostream>
+#include<ctime>
+#include<cstdlib>
+#include<unistd.h>
+
+using namespace std;
+
+// Numerical F(x) = 3x^2 integration Metropolis method
+// Probability density function P(x) = 2x
+// Integration (F(x)/P(x))P(x)
+int main()
+{
+
+    return 0;
+}
