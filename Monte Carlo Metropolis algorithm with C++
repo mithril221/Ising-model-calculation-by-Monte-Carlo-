@@ -8,8 +8,59 @@ using namespace std;
 // Numerical F(x) = 3x^2 integration Metropolis method
 // Probability density function P(x) = 2x
 // Integration (F(x)/P(x))P(x)
+
+double Integration(int x_range_min, int x_range_max, int N)
+{
+    int i;
+    double sum = 0;
+    double x[N];
+    double random_ratio;
+
+    x[0] = (double)rand() / (double(RAND_MAX) + 1) * (x_range_max - x_range_min) + x_range_min;
+
+    for(i = 0; i < N; i++)
+    {
+        x[i+1] = (double)rand() / (double(RAND_MAX) + 1.0) * (double)(x_range_max - x_range_min) + (double)x_range_min;
+        random_ratio = (double)rand() / (double(RAND_MAX) + 1.0) * (1.0 - 0.0) + 0.0;
+        cout << "Step " << i+1 << endl;
+        //cout << "x[" << i << "] = " << x[i] << endl;
+        //cout << "x[" << i+1 << "] = " << x[i+1] << endl;
+
+        if((2 * x[i+1])/(2 * x[i]) > random_ratio)
+        {
+            cout << "(2 * x[i+1])/(2 * x[i]) > " << random_ratio << endl;
+            sum += (1.0/double(N)) * 1.5 * x[i];
+            cout << "Summation : " << sum << endl;
+        }
+        else
+        {
+            x[i+1] = x[i];
+        }
+    }
+    return sum;
+}
+
 int main()
 {
+    cout << "F(x) = 3 * x^2 Function Integration" << endl;
+    cout << "P(x) = 2x" << endl;
+    cout << "Range x = 0 ~ 1" << endl;
+
+    int i = 0;                      // Index
+    int x_range_min = 0;            // x = 0
+    int x_range_max = 1;            // x = 1
+    int N;                          // the number of Monte Carlo attemps
+    double sum;                     // Integration result
+
+    cout << "the number of Monte Carlo attemps : ";
+    cin >> N;
+
+    // Random seed value generator
+    srand((unsigned int)time(0));
+
+    // Metropolis Integration function
+    sum = Integration(x_range_min, x_range_max, N);
+    cout << "Integration : " << sum << endl;
 
     return 0;
 }
